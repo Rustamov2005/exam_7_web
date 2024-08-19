@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import XizmatlarView, loging, register, logoutview, servises, abouts, contacts
+from .views import XizmatlarView, loging, register, logoutview, servises, abouts, MessageView
 
 urlpatterns = [
     path('xizmatlar/', XizmatlarView.as_view(), name='index'),
@@ -9,6 +9,5 @@ urlpatterns = [
     path('logout/', logoutview, name='logout'),
     path('servises/', servises, name='servises'),
     path('about/', abouts, name='about'),
-    path('contacts/', contacts, name='contacts'),
-    # path('article/', ArticleView.as_view(), name='article'),
+    path('messages/', MessageView.as_view(), name='messages'),
 ]

@@ -46,6 +46,19 @@ def logoutview(request):
     return HttpResponseRedirect(reverse('loging'))
 
 
+class MessageView(View):
+    def get(self, request):
+        try:
+            response = requests.get("http://127.0.0.1:8001/messages/")
+            response.raise_for_status()
+            messages = response.json()
+        except requests.RequestException as e:
+            messages = []
+            print(f"API so'rovi xatosi: {e}")
+        context = {"messages": messages}
+        return render(request, "contact.html", context)
+
+
 
 class XizmatlarView(View):
     def get(self, request):
@@ -108,16 +121,6 @@ def abouts(request):
     return render(request, 'about.html', context)
 
 
-def contacts(request):
-    return render(request, 'contact.html')
+# views.py
 
 
-
-
-# class ArticleView(View):
-#     def get(self, request):
-#         article = request.get("http://127.0.0.1:8001/articles/").json()
-#         context = {
-#             'article': article
-#         }
-#         return render(request, 'login.html', context)
